@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ControlaJogador : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class ControlaJogador : MonoBehaviour {
     void Start()
     {
         TextoGameOver.SetActive(false);
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -23,8 +25,6 @@ public class ControlaJogador : MonoBehaviour {
 
         direcao = new Vector3(eixoX, 0, eixoZ);
 
-        //transform.Translate(direcao * Velocidade * Time.deltaTime);
-
         if(direcao != Vector3.zero)
         {
             GetComponent<Animator>().SetBool("Movendo",true);
@@ -32,6 +32,14 @@ public class ControlaJogador : MonoBehaviour {
         else
         {
             GetComponent<Animator>().SetBool("Movendo", false);
+        }
+
+        if (Vivo == false)
+        {            
+            if (Input.GetButtonDown("Fire1"))
+            {
+                SceneManager.LoadScene("Game");
+            }
         }
     }
 
